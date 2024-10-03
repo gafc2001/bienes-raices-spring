@@ -1,0 +1,30 @@
+body{
+    overflow-x: hidden;
+}
+.header{
+    background-image: url('/img/header.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.contactanos-home{
+    background-image: url('/img/encuentra.jpg');
+    background-position: center;
+    height: 25rem;    
+}
+.bg-green-app{
+    background-color: #71b100;
+}
+.title-separator{
+    height: 10px;
+    width: 30%;
+}
+
+.testimonial-item::before{
+    content: '"';
+    position: absolute;
+    font-size: 130px;
+    top: -20px;
+    left: 10px;
+    font-family: ui-sans-serif;
+}

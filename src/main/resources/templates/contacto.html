@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienes y Raíces - Kattia Orozco</title>
+  <meta name="description" content="Esta es una página de prueba">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    /* Asegúrate de que los modales tengan un z-index alto */
+    .modal-backdrop.show {
+      z-index: 1040 !important;
+    }
+    .modal.fade.show {
+      z-index: 1050 !important;
+    }
+    .modal-content {
+      z-index: 1060 !important;
+    }
+    /* Modal de campos obligatorios siempre encima */
+    .modal#alertaModal {
+      z-index: 1070 !important;
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container d-flex justify-content-between w-100">
+            <a class="navbar-brand text-white" href="../../../../../../Trabajo/bienes-raices-bootstrap"><h1 class="fw-lighter text-uppercase">Bienes<span class="fw-bold">Raices</span></h1></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon text-white"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5 fw-light active" aria-current="page" href="nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5 fw-light" href="anuncios.html">Anuncios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5 fw-light" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fs-5 fw-light" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="fw-bold text-center mb-4">Contacto</h1>
+        <img src="/assets/img/destacada3.jpg" alt="" class="img-fluid mb-4">
+        <main class="seccion contenido-centrado">
+            <h2 class="fw-bold text-center mb-3">Llena el Formulario</h2>
+            <form id="contactForm" class="contacto">
+                <fieldset class="mb-4">
+                    <legend class="fw-semibold">Información Personal</legend>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Tu Nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail:</label>
+                        <input type="email" id="email" class="form-control" placeholder="Tu Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono:</label>
+                        <input type="tel" id="telefono" class="form-control" placeholder="Tu Teléfono" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mensaje" class="form-label">Mensaje:</label>
+                        <textarea id="mensaje" class="form-control" rows="5"></textarea>
+                    </div>
+                </fieldset>   
+
+                <fieldset class="mb-4">
+                    <legend class="fw-semibold">Información sobre Propiedad</legend>
+                    <div class="mb-3">
+                        <label for="opciones" class="form-label">Vende o Compra:</label>
+                        <select id="opciones" class="form-select">
+                            <option selected disabled>--Selecciona--</option>
+                            <option value="compra">Compra</option>
+                            <option value="venta">Venta</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="presupuesto" class="form-label">Presupuesto:</label>
+                        <input type="number" id="presupuesto" class="form-control">
+                    </div>
+                </fieldset>  
+
+                <fieldset class="mb-4">
+                    <legend class="fw-semibold">Contacto</legend>
+                    <p>¿Cómo desea ser Contactado?</p>
+                    <div class="mb-3">
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" name="opcion" id="tele">
+                            <label for="tele" class="form-check-label">Teléfono</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" name="opcion" id="correo">
+                            <label for="correo" class="form-check-label">Correo</label>
+                        </div>
+                    </div>
+                    <p>Si eligió Teléfono, elija la Fecha y Hora:</p>
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label">Fecha:</label>
+                        <input type="date" id="fecha" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="hora" class="form-label">Hora:</label>
+                        <input type="time" id="hora" class="form-control">
+                    </div>
+                </fieldset>
+
+                <!-- Botones adicionales con íconos -->
+                <div class="d-flex justify-content-between mt-4">
+                    <!-- Botón de Enviar -->
+                    <button type="button" id="enviarBtn" class="btn btn-primary">
+                        <i class="bi bi-send"></i> Enviar
+                    </button>
+                    <button type="button" id="editarBtn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editarModal">
+                        <i class="bi bi-pencil-square"></i> Editar
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal">
+                        <i class="bi bi-trash"></i> Eliminar
+                    </button>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registroModal">
+                        <i class="bi bi-plus-circle"></i> Registro Nuevo
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- Modal de Alerta (Campos Obligatorios) -->
+    <div class="modal fade" id="alertaModal" tabindex="-1" aria-labelledby="alertaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertaModalLabel">Campos Obligatorios</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Por favor, complete los campos obligatorios: correo y teléfono.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Registro Nuevo -->
+    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registroModalLabel">Nuevo Registro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="nuevoRegistroForm">
+                        <div class="mb-3">
+                            <label for="registroNombre" class="form-label">Nombre:</label>
+                            <input type="text" id="registroNombre" class="form-control" placeholder="Nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registroEmail" class="form-label">Email:</label>
+                            <input type="email" id="registroEmail" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registroTelefono" class="form-label">Teléfono:</label>
+                            <input type="tel" id="registroTelefono" class="form-control" placeholder="Teléfono" required>
+                        </div>
+                        <button type="button" class="btn btn-success" id="registrarBtn">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Registro -->
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarModalLabel">Editar Registro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarRegistroForm">
+                        <div class="mb-3">
+                            <label for="editarEmail" class="form-label">Email:</label>
+                            <input type="email" id="editarEmail" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editarTelefono" class="form-label">Teléfono:</label>
+                            <input type="tel" id="editarTelefono" class="form-control" placeholder="Teléfono" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="guardarCambiosBtn">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación de Eliminación -->
+    <div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="confirmarEliminarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmarEliminarModalLabel">Confirmación de Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro de que desea eliminar este registro?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmarEliminarBtn">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Éxito -->
+    <div class="modal fade" id="exitoModal" tabindex="-1" aria-labelledby="exitoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exitoModalLabel">Éxito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>La acción se realizó con éxito.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="redirectHomeBtn">Ir a Contacto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('enviarBtn').addEventListener('click', function() {
+            var email = document.getElementById('email').value;
+            var telefono = document.getElementById('telefono').value;
+            if (email === '' || telefono === '') {
+                var alertaModal = new bootstrap.Modal(document.getElementById('alertaModal'));
+                alertaModal.show();
+            } else {
+                var exitoModal = new bootstrap.Modal(document.getElementById('exitoModal'));
+                exitoModal.show();
+            }
+        });
+
+        document.getElementById('registrarBtn').addEventListener('click', function() {
+            var registroNombre = document.getElementById('registroNombre').value;
+            var registroEmail = document.getElementById('registroEmail').value;
+            var registroTelefono = document.getElementById('registroTelefono').value;
+            if (registroNombre === '' || registroEmail === '' || registroTelefono === '') {
+                var alertaModal = new bootstrap.Modal(document.getElementById('alertaModal'));
+                alertaModal.show();
+            } else {
+                var exitoModal = new bootstrap.Modal(document.getElementById('exitoModal'));
+                exitoModal.show();
+            }
+        });
+
+        document.getElementById('guardarCambiosBtn').addEventListener('click', function() {
+            var editarEmail = document.getElementById('editarEmail').value;
+            var editarTelefono = document.getElementById('editarTelefono').value;
+            if (editarEmail === '' || editarTelefono === '') {
+                var alertaModal = new bootstrap.Modal(document.getElementById('alertaModal'));
+                alertaModal.show();
+            } else {
+                var exitoModal = new bootstrap.Modal(document.getElementById('exitoModal'));
+                exitoModal.show();
+            }
+        });
+
+        document.getElementById('confirmarEliminarBtn').addEventListener('click', function() {
+            // Aquí puedes agregar la lógica para eliminar el registro
+            var exitoModal = new bootstrap.Modal(document.getElementById('exitoModal'));
+            exitoModal.show();
+        });
+
+        document.getElementById('redirectHomeBtn').addEventListener('click', function() {
+            window.location.href = 'contacto.html';
+        });
+    </script>
+
+<footer class="site-footer bg-dark py-4 mt-4">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg justify-content-center mb-3">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-white" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="anuncios.html">Anuncios</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <p class="text-center mb-0 text-white">&copy; Todos los Derechos Reservados 2019</p>
+    </div>
+</footer>
+</body>
+</html>
