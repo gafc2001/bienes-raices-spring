@@ -20,48 +20,20 @@
         <div class="col-12 col-md-8">
             <h2 class="fw-light fs-1 mb-5 text-center">Nuestro Blog</h2>
             <div>
-                <article class="row mb-2">
+                <article class="row mb-2" th:each="blog : ${blogs}">
                     <div class="col-12 col-md-4">
-                        <img th:src="@{/img/blog1.jpg}" class="img-fluid"/>
+                        <img th:src="@{${blog.imagePath}}" alt="" class="img-fluid">
                     </div>
                     <div class="col-12 col-md-8">
-                        <h3 class="mb-2">Terraza en el techo de tu casa</h3>
+                        <h3 class="mb-2" th:text="${blog.title}"></h3>
                         <div class="title-separator bg-green-app mb-3"></div>
-                        <span class="mb-3 d-block">Escrito el <span class="text-warning fw-bold">04/09/2024: Jonas</span> </span>
-                        <p>Consejos para construir una terraza en el techo de tu casa, con los mejores materiales y ahorrando dinero</p>
-                    </div>
-                </article>
-                <article class="row">
-                    <div class="col-12 col-md-4">
-                        <img th:src="@{/img/blog2.jpg}" class="img-fluid"/>
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <h3 class="mb-2">Guía para la decoración de tu hogar</h3>
-                        <div class="title-separator bg-green-app mb-3"></div>
-                        <span class="mb-3 d-block">Escrito el <span class="text-warning fw-bold">04/09/2024: Jonas</span> </span>
-                        <p>Maximiza el espacio en tu hogar con esta guía, aprende a combinar muebles y colores para darle vida a tu espacio</p>
-                    </div>
-                </article>
-                <article class="row mb-2">
-                    <div class="col-12 col-md-4">
-                        <img th:src="@{/img/blog1.jpg}" class="img-fluid"/>
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <h3 class="mb-2">Terraza en el techo de tu casa</h3>
-                        <div class="title-separator bg-green-app mb-3"></div>
-                        <span class="mb-3 d-block">Escrito el <span class="text-warning fw-bold">04/09/2024: Jonas</span> </span>
-                        <p>Consejos para construir una terraza en el techo de tu casa, con los mejores materiales y ahorrando dinero</p>
-                    </div>
-                </article>
-                <article class="row">
-                    <div class="col-12 col-md-4">
-                        <img th:src="@{/img/blog4.jpg}" class="img-fluid"/>
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <h3 class="mb-2">Guía para la decoración de tu hogar</h3>
-                        <div class="title-separator bg-green-app mb-3"></div>
-                        <span class="mb-3 d-block">Escrito el <span class="text-warning fw-bold">04/09/2024: Jonas</span> </span>
-                        <p>Maximiza el espacio en tu hogar con esta guía, aprende a combinar muebles y colores para darle vida a tu espacio</p>
+                        <span class="mb-3 d-block">
+                            <span>Escrito por: </span>
+                            <span class="text-warning fw-bold">
+                                <span th:text="${blog.usuario.username}"></span>
+                            </span>
+                        </span>
+                        <p th:text="${blog.texto}"></p>
                     </div>
                 </article>
             </div>

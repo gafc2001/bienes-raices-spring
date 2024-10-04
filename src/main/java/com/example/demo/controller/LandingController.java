@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.Service.AnuncioService;
+import com.example.demo.Service.BlogService;
 import com.example.demo.model.Anuncio;
+import com.example.demo.model.Blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,9 @@ public class LandingController {
 
     @Autowired
     private AnuncioService anuncioService;
+
+    @Autowired
+    private BlogService blogService;
     @GetMapping
     public String index(){
         return "index";
@@ -30,7 +35,9 @@ public class LandingController {
         return "anuncios";
     }
     @GetMapping("blog")
-    public String blog(){
+    public String blog(Model model){
+        List<Blog> blogs = blogService.getBlogs();
+        model.addAttribute("blogs",blogs);
         return "blog";
     }
     @GetMapping("contacto")
