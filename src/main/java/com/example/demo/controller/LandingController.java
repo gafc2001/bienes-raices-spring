@@ -11,9 +11,20 @@ public class LandingController {
         return "index";
     }
 
-    @GetMapping("/contacto.html")
-    public String contacto() {
+    @GetMapping("nosotros")
+    public String nosotros(){
+        return "nosotros";
+    }
+    @GetMapping("anuncios")
+    public String anuncios(){
+        return "anuncios";
+    }
+    @GetMapping("blog")
+    public String blog(){
+        return "blog";
+    }
+    @GetMapping("contacto")
+    public String contacto(){
         return "contacto";
     }
-
 }
