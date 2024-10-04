@@ -63,7 +63,7 @@
                     <legend class="fw-semibold">Información Personal</legend>
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Tu Nombre">
+                        <input type="text" id="nombre" class="form-control" placeholder="Tu Nombre" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail:</label>
@@ -251,50 +251,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         document.getElementById('enviarBtn').addEventListener('click', function() {
+            var nombres = document.getElementById('nombres').value;
             var email = document.getElementById('email').value;
             var telefono = document.getElementById('telefono').value;
-            if (email === '' || telefono === '') {
-                var alertaModal = new bootstrap.Modal(document.getElementById('alertaModal'));
-                alertaModal.show();
-            } else {
-                var exitoModal = new bootstrap.Modal(document.getElementById('exitoModal'));
-                exitoModal.show();
-            }
-        });
+            var mensaje = document.getElementById('mensaje').value;
+            var accion = document.getElementById('accion').value;
+            var presupuesto = document.getElementById('presupuesto').value;
+            var typeContact = document.getElementById('typeContact').value;
+            var dateContact = document.getElementById('dateContact').value;
+            var timeContact = document.getElementById('timeContact').value;
 
-        document.getElementById('registrarBtn').addEventListener('click', function() {
-            var registroNombre = document.getElementById('registroNombre').value;
-            var registroEmail = document.getElementById('registroEmail').value;
-            var registroTelefono = document.getElementById('registroTelefono').value;
-            if (registroNombre === '' || registroEmail === '' || registroTelefono === '') {
-                var alertaModal = new bootstrap.Modal(document.getElementById('alertaModal'));
-                alertaModal.show();
-            } else {
-                var exitoModal = new bootstrap.Modal(document.getElementById('exitoModal'));
-                exitoModal.show();
-            }
-        });
+            var contactoData = {
+                nombres: nombres,
+                email: email,
+                telefono: telefono,
+                mensaje: mensaje,
+                accion: accion,
+                presupuesto: presupuesto,
+                typeContact: typeContact,
+                dateContact: dateContact,
+                timeContact: timeContact
+            };
 
-        document.getElementById('guardarCambiosBtn').addEventListener('click', function() {
-            var editarEmail = document.getElementById('editarEmail').value;
-            var editarTelefono = document.getElementById('editarTelefono').value;
-            if (editarEmail === '' || editarTelefono === '') {
-                var alertaModal = new bootstrap.Modal(document.getElementById('alertaModal'));
-                alertaModal.show();
-            } else {
-                var exitoModal = new bootstrap.Modal(document.getElementById('exitoModal'));
-                exitoModal.show();
-            }
-        });
-
-        document.getElementById('confirmarEliminarBtn').addEventListener('click', function() {
-            // Aquí puedes agregar la lógica para eliminar el registro
-            var exitoModal = new bootstrap.Modal(document.getElementById('exitoModal'));
-            exitoModal.show();
-        });
-
-        document.getElementById('redirectHomeBtn').addEventListener('click', function() {
-            window.location.href = 'contacto.html';
+            fetch('/api/v1/contactos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(contactoData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Contacto registrado exitosamente');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error al registrar el contacto');
+            });
         });
     </script>
 

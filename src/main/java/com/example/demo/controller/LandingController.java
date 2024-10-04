@@ -11,4 +11,9 @@ public class LandingController {
         return "index";
     }
 
+    @GetMapping("/contacto.html")
+    public String contacto() {
+        return "contacto";
+    }
+
 }
