@@ -39,10 +39,15 @@ public class DatabaseSeeder implements ApplicationRunner {
                 log.info("Success run anuncio seeder");
             }
             if(seeder.contains("all")) {
+                cleanDb();
                 seedUsers();
                 seedAnuncios();
                 seedBlog();
                 log.info("Seeder completed");
+            }
+            if(seeder.contains("clean")) {
+                cleanDb();
+                log.info("DB cleaned");
             }
         }else{
             log.info("anuncio seeder skipped");
@@ -131,7 +136,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     private void seedBlog(){
-        Usuario usuario = this.usuarioRepository.findById(Long.valueOf(1)).get();
+        Usuario usuario = this.usuarioRepository.findByUsername("gfarfan").get();
 
         Blog b1 = new Blog();
         b1.setTitle("Terraza en el techo de tu casa");
@@ -183,5 +188,11 @@ public class DatabaseSeeder implements ApplicationRunner {
         this.usuarioRepository.save(u1);
 
         log.info("Success run User Seeder {}");
+    }
+    private void cleanDb(){
+        this.blogRepository.deleteAll();
+        this.anuncioRepository.deleteAll();
+        this.usuarioRepository.deleteAll();
+        this.rolRepository.deleteAll();;
     }
 }
