@@ -1,7 +1,13 @@
 package com.example.demo.seeder;
 
 import com.example.demo.model.Anuncio;
+import com.example.demo.model.Blog;
+import com.example.demo.model.Rol;
+import com.example.demo.model.Usuario;
 import com.example.demo.repository.AnuncioRepository;
+import com.example.demo.repository.BlogRepository;
+import com.example.demo.repository.RolRepository;
+import com.example.demo.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +24,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DatabaseSeeder implements ApplicationRunner {
     private final AnuncioRepository anuncioRepository;
+    private final BlogRepository blogRepository;
+    private final RolRepository rolRepository;
+    private final UsuarioRepository usuarioRepository;
 
     private static final Logger log = LoggerFactory.getLogger(DatabaseSeeder.class);
 
@@ -28,6 +37,12 @@ public class DatabaseSeeder implements ApplicationRunner {
             if(seeder.contains("anuncio")) {
                 seedAnuncios();
                 log.info("Success run anuncio seeder");
+            }
+            if(seeder.contains("all")) {
+                seedUsers();
+                seedAnuncios();
+                seedBlog();
+                log.info("Seeder completed");
             }
         }else{
             log.info("anuncio seeder skipped");
@@ -113,5 +128,60 @@ public class DatabaseSeeder implements ApplicationRunner {
 
             index++;
         }
+    }
+
+    private void seedBlog(){
+        Usuario usuario = this.usuarioRepository.findById(Long.valueOf(1)).get();
+
+        Blog b1 = new Blog();
+        b1.setTitle("Terraza en el techo de tu casa");
+        b1.setTexto("Consejos para construir una terraza en el techo de tu casa, con los mejores materiales y ahorrando dinero");
+        b1.setUsuario(usuario);
+        b1.setImagePath("/img/blog1.jpg");
+
+        Blog b2 = new Blog();
+        b2.setTitle("Guía para la decoración de tu hogar");
+        b2.setTexto("Consejos para construir una terraza en el techo de tu casa, con los mejores materiales y ahorrando dinero");
+        b2.setUsuario(usuario);
+        b2.setImagePath("/img/blog2.jpg");
+
+        Blog b3 = new Blog();
+        b3.setTitle("Crea hermosas terrazas");
+        b3.setTexto("Consejos para construir una terraza en el techo de tu casa, con los mejores materiales y ahorrando dinero");
+        b3.setUsuario(usuario);
+        b3.setImagePath("/img/blog1.jpg");
+
+        Blog b4 = new Blog();
+        b4.setTitle("Guia para un cuarto hermoso");
+        b4.setTexto("Maximiza el espacio en tu hogar con esta guía, aprende a combinar muebles y colores para darle vida a tu espacio");
+        b4.setUsuario(usuario);
+        b4.setImagePath("/img/blog4.jpg");
+
+        List<Blog> blogs = new ArrayList<>();
+        blogs.add(b1);
+        blogs.add(b2);
+        blogs.add(b3);
+        blogs.add(b4);
+        for (var blog : blogs ) {
+
+            this.blogRepository.save(blog);
+
+            log.info("Success run Blog Seeder {}");
+        }
+    }
+    private void seedUsers(){
+        Rol rol = new Rol();
+        rol.setName("USUARIO");
+        this.rolRepository.save(rol);
+        log.info("Success run Rol  Seeder {}");
+        Usuario u1 = new Usuario();
+        u1.setNombres("Gustavo");
+        u1.setApellidos("Farfan");
+        u1.setUsername("gfarfan");
+        u1.setRol(rol);
+
+        this.usuarioRepository.save(u1);
+
+        log.info("Success run User Seeder {}");
     }
 }
