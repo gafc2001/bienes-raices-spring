@@ -48,7 +48,7 @@
             </button>
           </div>
         <div class="row">
-            <article class="col-12 col-md-4 mb-4 mb-md-0" th:each="anuncio : ${anuncios}">
+            <article class="col-12 col-md-4 mb-4" th:each="anuncio : ${anuncios}">
                 <div class="zoom-container">
                     <img th:src="@{${anuncio.rutaImage}}" alt="" class="img-fluid">
                 </div>
