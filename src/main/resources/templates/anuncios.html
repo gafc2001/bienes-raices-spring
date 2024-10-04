@@ -48,27 +48,27 @@
             </button>
           </div>
         <div class="row">
-            <article class="col-12 col-md-4 mb-4 mb-md-0">
+            <article class="col-12 col-md-4 mb-4 mb-md-0" th:each="anuncio : ${anuncios}">
                 <div class="zoom-container">
-                    <img th:src="@{/img/anuncio1.jpg}" alt="" class="img-fluid">
+                    <img th:src="@{${anuncio.rutaImage}}" alt="" class="img-fluid">
                 </div>
                 
                 <div class="bg-body-secondary p-4">
-                    <h3>Casa de Lujo en el Lago</h3>
-                     <p>Casa en el lago con excelente vista,acabados de lujo a un excelente precio</p>
-                    <span class="text-success fw-bold fs-5 mb-3 d-inline-block">$3,000,000</span>
+                    <h3 th:text="${anuncio.title}"></h3>
+                    <p th:text="${anuncio.descripcionCorta}"></p>
+                    <span class="text-success fw-bold fs-5 mb-3 d-inline-block" th:text="${anuncio.precio}">$</span>
                     <div class="row mb-3">
                         <div class="col-4">
                             <img th:src="@{/img/icono_wc.svg}"/>
-                            <span>3</span>
+                            <span th:text="${anuncio.cantidadBanios}">3</span>
                         </div>
                         <div class="col-4">
                             <img th:src="@{/img/icono_estacionamiento.svg}"/>
-                            <span>3</span>
+                            <span th:text="${anuncio.cantidadCochera}">3</span>
                         </div>
                         <div class="col-4">
                             <img th:src="@{/img/icono_dormitorio.svg}"/>
-                            <span>3</span>
+                            <span th:text="${anuncio.cantidadCuartos}">3</span>
                         </div>
                     </div>
                     <div>
