@@ -1,6 +1,4 @@
-package com.example.demo.Service;
-
-import com.example.demo.Service.ContactoService;   // Asegúrate de que este sea el paquete correcto
+package com.example.demo.service;
 
 import com.example.demo.model.Contacto;
 import com.example.demo.repository.ContactoRepository;  // Importación necesaria

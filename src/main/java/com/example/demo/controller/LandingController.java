@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.Service.AnuncioService;
-import com.example.demo.Service.BlogService;
+import com.example.demo.service.AnuncioService;
+import com.example.demo.service.BlogService;
 import com.example.demo.model.Anuncio;
 import com.example.demo.model.Blog;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,39 +49,7 @@ public class LandingController {
         return "contacto";
     }
 
-    @GetMapping("administrador")
-    public String administrador(){return "administrador";}
 
-    @PostMapping("administrador")
-    public String administrador(@RequestParam String username,
-                                @RequestParam String password,
-                                HttpServletRequest request,
-                                Model model){
-        if ("admin".equals(username) && "admin".equals(password)){
-            HttpSession session= request.getSession();
-            session.setAttribute("username",username);
-            return "redirect:/dashboard";
-        }else {
-            model.addAttribute("error",true);
-            return "administrador";
-        }
-    }
-    @GetMapping("/dashboard")
-    public String dashboard(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("username") != null) {
-            model.addAttribute("username", session.getAttribute("username"));
-            return "dashboard";
-        }
-        return "redirect:/administrador";
-    }
 
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        return "redirect:/administrador";
-    }
+
 }

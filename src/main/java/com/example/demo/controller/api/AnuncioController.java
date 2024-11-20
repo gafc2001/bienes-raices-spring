@@ -1,7 +1,7 @@
 package com.example.demo.controller.api;
 
 
-import com.example.demo.Service.AnuncioService;
+import com.example.demo.service.AnuncioService;
 import com.example.demo.dto.AnuncioBodyRequest;
 import com.example.demo.model.Anuncio;
 import jakarta.validation.Valid;
