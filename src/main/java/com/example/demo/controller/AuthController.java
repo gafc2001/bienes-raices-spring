@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AuthController {
 
-
     private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 
     @GetMapping("/login")
@@ -27,6 +26,6 @@ public class AuthController {
         if (session != null) {
             session.invalidate();
         }
-        return "redirect:/auth/login";
+        return "redirect:/login";
     }
 }

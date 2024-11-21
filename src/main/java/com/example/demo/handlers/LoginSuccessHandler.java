@@ -21,10 +21,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private static final Logger log = LoggerFactory.getLogger(LoginSuccessHandler.class);
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        log.info("SESSION");
         String username = authentication.getName();
         HttpSession session = request.getSession();
         session.setAttribute("username", username);
