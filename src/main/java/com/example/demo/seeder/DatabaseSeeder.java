@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -183,6 +184,7 @@ public class DatabaseSeeder implements ApplicationRunner {
         u1.setNombres("Gustavo");
         u1.setApellidos("Farfan");
         u1.setUsername("gfarfan");
+        u1.setPassword(new BCryptPasswordEncoder().encode("123"));
         u1.setRol(rol);
 
         this.usuarioRepository.save(u1);
