@@ -17,6 +17,9 @@ public class AnuncioService {
         return anuncioRepository.findAll();
     }
 
+    public Anuncio obtenerAnuncioPorId(Long id){
+        return anuncioRepository.findById(id).get();
+    }
     public Anuncio crearAnuncio(AnuncioBodyRequest anuncioBodyRequest){
         Anuncio anuncio = anuncioBodyRequest.buildAnuncio();
         return anuncioRepository.save(anuncio);
