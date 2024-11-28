@@ -19,6 +19,6 @@ public class AdminController {
     public String index(Model model, Principal principal){
         String username = principal.getName();
         model.addAttribute("username",username);
-        return "admin/dashboard";
+        return "admin/index";
     }
 }
