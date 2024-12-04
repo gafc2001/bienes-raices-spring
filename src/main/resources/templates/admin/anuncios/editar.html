@@ -46,11 +46,12 @@
                     <div class="card-header">
                         <div class="card-title">Editar anuncio</div>
                     </div> <!--end::Header--> <!--begin::Form-->
-                    <form> <!--begin::Body-->
+                    <form th:object="${anuncio}" th:action="@{'/admin/anuncios/editar/' + ${anuncio.id}}" method="POST" enctype="multipart/form-data">
+                        <span th:text="${error}"></span>
                         <div class="card-body">
                             <div class="mb-3"> 
                                 <label for="inputTitle" class="form-label">Titulo</label> 
-                                <input type="email" class="form-control" id="inputTitle" th:field="*{title}">
+                                <input class="form-control" id="inputTitle" th:field="*{title}">
                             </div>
                             <div class="mb-3"> 
                                 <label for="inputDescription" class="form-label">Descripcion corta</label> 
@@ -62,9 +63,9 @@
                             </div>
                             <div class="mb-3"> 
                                 <label for="inputNumber" class="form-label">Precio</label> 
-                                <input type="email" class="form-control" id="inputNumber" th:field="*{precio}">
+                                <input type="number" class="form-control" id="inputNumber" th:field="*{precio}">
                             </div>
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-4">
                                     <label for="inputBathroom" class="form-label">
                                         <img th:src="@{/img/icono_wc.svg}"/>
@@ -85,6 +86,15 @@
                                         Dormitorios
                                     </label>
                                     <input type="number" class="form-control" id="inputBedroom" th:field="*{cantidadCuartos}">
+                                </div>
+                            </div>
+                            <div class="row w-25">
+                                <div class="mb-3">
+                                    <label for="formImg" class="form-label">Imagen</label>
+                                    <input class="form-control" type="file" name="imagenFile" id="formImg" accept="image/*">
+                                </div>
+                                <div>
+                                    <img th:src="@{${anuncio.rutaImage}}" class="img-fluid">
                                 </div>
                             </div>
                         </div> <!--end::Body--> <!--begin::Footer-->

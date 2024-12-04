@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.AnuncioBodyRequest;
+import com.example.demo.dto.AnuncioDTO;
 import com.example.demo.model.Anuncio;
 import com.example.demo.repository.AnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +20,11 @@ public class AnuncioService {
     public Anuncio obtenerAnuncioPorId(Long id){
         return anuncioRepository.findById(id).get();
     }
-    public Anuncio crearAnuncio(AnuncioBodyRequest anuncioBodyRequest){
+    public Anuncio crearAnuncio(AnuncioDTO anuncioBodyRequest){
         Anuncio anuncio = anuncioBodyRequest.buildAnuncio();
         return anuncioRepository.save(anuncio);
     }
-    public Anuncio editarAnuncio(AnuncioBodyRequest anuncioBodyRequest,Long id){
+    public Anuncio editarAnuncio(AnuncioDTO anuncioBodyRequest,Long id){
         Anuncio anuncio = anuncioRepository.findById(id).get();
         anuncio.setTitle(anuncioBodyRequest.getTitle());
         anuncio.setDescripcionCorta(anuncioBodyRequest.getDescripcionCorta());
@@ -33,6 +33,7 @@ public class AnuncioService {
         anuncio.setCantidadBanios(anuncioBodyRequest.getCantidadBanios());
         anuncio.setCantidadCochera(anuncioBodyRequest.getCantidadCochera());
         anuncio.setCantidadCuartos(anuncioBodyRequest.getCantidadCuartos());
+        anuncio.setRutaImage(anuncioBodyRequest.getRutaImage());
         return  anuncioRepository.save(anuncio);
     }
 

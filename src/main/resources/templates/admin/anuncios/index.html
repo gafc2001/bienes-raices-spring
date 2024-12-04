@@ -42,10 +42,13 @@
         <div class="app-content">
             <!--begin::Container-->
             <div class="container-fluid" th:fragment="main(content)">
+                <div class="mb-4">
+                    <a href="/admin/anuncios/crear" class="btn btn-primary px-3 rounded-0 text-uppercase">Crear</a>
+                </div>
                 <div class="row">
-                    <article class="col-12 col-md-2 mb-4" th:each="anuncio : ${anuncios}">
+                    <article class="col-12 col-md-6 col-lg-2 mb-4" th:each="anuncio : ${anuncios}">
                         <div class="zoom-container">
-                            <img th:src="@{${anuncio.rutaImage}}" alt="" class="img-fluid">
+                            <img th:src="@{${anuncio.rutaImage}}" alt="" class="img-fluid" style="aspect-ratio: 4/3">
                         </div>
 
                         <div class="bg-body-secondary p-4">
@@ -69,7 +72,7 @@
                                 </div>
                             </div>
                             <div>
-                                <a th:href="${'/admin/anuncios/editar/' + anuncio.id}" class="btn btn-success rounded-0 text-uppercase text-light w-100">Editar propiedad</a>
+                                <a th:href="${'/admin/anuncios/' + anuncio.id}" class="btn btn-success rounded-0 text-uppercase text-light w-100">Editar propiedad</a>
                             </div>
                         </div>
                     </article>

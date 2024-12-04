@@ -1,8 +1,8 @@
 package com.example.demo.controller.api;
 
 
+import com.example.demo.dto.AnuncioDTO;
 import com.example.demo.service.AnuncioService;
-import com.example.demo.dto.AnuncioBodyRequest;
 import com.example.demo.model.Anuncio;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +26,13 @@ public class AnuncioController {
     }
 
     @PostMapping
-    public Anuncio crearAnuncio(@RequestBody AnuncioBodyRequest anuncioBodyRequest){
+    public Anuncio crearAnuncio(@RequestBody AnuncioDTO anuncioBodyRequest){
         return this.anuncioService.crearAnuncio(anuncioBodyRequest);
     }
 
     @PutMapping("/{id}")
-    public Anuncio editarAnuncio(@PathVariable Long id,@Valid @RequestBody AnuncioBodyRequest anuncioBodyRequest){
-        return this.anuncioService.editarAnuncio(anuncioBodyRequest,id);
+    public Anuncio editarAnuncio(@PathVariable Long id,@Valid @RequestBody AnuncioDTO anuncioDTO){
+        return this.anuncioService.editarAnuncio(anuncioDTO,id);
     }
 
     @DeleteMapping("/{id}")
