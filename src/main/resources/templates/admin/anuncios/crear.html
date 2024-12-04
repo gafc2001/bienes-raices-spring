@@ -46,24 +46,24 @@
                     <div class="card-header">
                         <div class="card-title">Editar anuncio</div>
                     </div> <!--end::Header--> <!--begin::Form-->
-                    <form th:object="${anuncio}" th:action="@{'/admin/anuncios/editar/' + ${anuncio.id}}" method="POST" enctype="multipart/form-data">
+                    <form th:object="${anuncio}" th:action="@{'/admin/anuncios/guardar'}" method="POST" enctype="multipart/form-data">
                         <span th:text="${error}"></span>
                         <div class="card-body">
-                            <div class="mb-3"> 
-                                <label for="inputTitle" class="form-label">Titulo</label> 
-                                <input class="form-control" id="inputTitle" th:field="*{title}" required>
+                            <div class="mb-3">
+                                <label for="inputTitle" class="form-label">Titulo</label>
+                                <input class="form-control" id="inputTitle" th:field="*{title}">
                             </div>
-                            <div class="mb-3"> 
-                                <label for="inputDescription" class="form-label">Descripcion corta</label> 
-                                <input class="form-control" id="inputDescription" th:field="*{descripcionCorta}" required>
+                            <div class="mb-3">
+                                <label for="inputDescription" class="form-label">Descripcion corta</label>
+                                <input class="form-control" id="inputDescription" th:field="*{descripcionCorta}"></input>
                             </div>
-                            <div class="mb-3"> 
-                                <label for="inputDescription" class="form-label">Descripcion larga</label> 
-                                <input class="form-control" id="inputDescription" th:field="*{descripcionLarga}" required>
+                            <div class="mb-3">
+                                <label for="inputDescription" class="form-label">Descripcion larga</label>
+                                <input class="form-control" id="inputDescription" th:field="*{descripcionLarga}"></input>
                             </div>
-                            <div class="mb-3"> 
-                                <label for="inputNumber" class="form-label">Precio</label> 
-                                <input type="number" class="form-control" id="inputNumber" th:field="*{precio}" required>
+                            <div class="mb-3">
+                                <label for="inputNumber" class="form-label">Precio</label>
+                                <input type="number" class="form-control" id="inputNumber" th:field="*{precio}">
                             </div>
                             <div class="row mb-3">
                                 <div class="col-4">
@@ -71,35 +71,35 @@
                                         <img th:src="@{/img/icono_wc.svg}"/>
                                         Baños
                                     </label>
-                                    <input type="number" class="form-control" id="inputBathroom" th:field="*{cantidadBanios}" required>
+                                    <input type="number" class="form-control" id="inputBathroom" th:field="*{cantidadBanios}">
                                 </div>
                                 <div class="col-4">
                                     <label for="inputGarage" class="form-label">
                                         <img th:src="@{/img/icono_estacionamiento.svg}"/>
                                         Cocheras
                                     </label>
-                                    <input type="number" class="form-control" id="inputGarage" th:field="*{cantidadCochera}" required>
+                                    <input type="number" class="form-control" id="inputGarage" th:field="*{cantidadCochera}">
                                 </div>
                                 <div class="col-4">
                                     <label for="inputBedroom" class="form-label">
                                         <img th:src="@{/img/icono_dormitorio.svg}"/>
                                         Dormitorios
                                     </label>
-                                    <input type="number" class="form-control" id="inputBedroom" th:field="*{cantidadCuartos}" required>
+                                    <input type="number" class="form-control" id="inputBedroom" th:field="*{cantidadCuartos}">
                                 </div>
                             </div>
                             <div class="row w-25">
                                 <div class="mb-3">
                                     <label for="formImg" class="form-label">Imagen</label>
-                                    <input class="form-control" type="file" name="imagenFile" id="formImg" accept="image/*" required>
+                                    <input class="form-control" type="file" name="imagenFile" id="formImg" accept="image/*">
                                 </div>
                                 <div>
                                     <img th:src="@{${anuncio.rutaImage}}" class="img-fluid">
                                 </div>
                             </div>
                         </div> <!--end::Body--> <!--begin::Footer-->
-                        <div class="card-footer"> 
-                            <button type="submit" class="btn btn-primary">Guardar</button> 
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div> <!--end::Footer-->
                     </form> <!--end::Form-->
                 </div>

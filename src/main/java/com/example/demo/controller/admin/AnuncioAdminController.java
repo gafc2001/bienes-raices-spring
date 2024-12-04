@@ -3,6 +3,7 @@ package com.example.demo.controller.admin;
 import com.example.demo.dto.AnuncioDTO;
 import com.example.demo.model.Anuncio;
 import com.example.demo.service.AnuncioService;
+import com.example.demo.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,7 +57,7 @@ public class AnuncioAdminController {
                 Files.createDirectories(uploadPath);
             }
             if(!file.isEmpty()){
-                String hashName = generateFileHash(file);
+                String hashName = Util.generateFileHash(file);
                 Path path = Paths.get(carpeta + hashName);
                 Files.write(path, file.getBytes());
                 String filePath = "/img/" + hashName;
@@ -75,14 +76,46 @@ public class AnuncioAdminController {
         }
 
     }
-    private String generateFileHash(MultipartFile file) throws NoSuchAlgorithmException, IOException {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] hashBytes = digest.digest(file.getBytes());
-        return HexFormat.of().formatHex(hashBytes) + getFileExtension(file.getOriginalFilename());
+
+    @GetMapping("/crear")
+    public String crearAnuncio(Model model){
+        AnuncioDTO anuncioDTO = new AnuncioDTO();
+        model.addAttribute("anuncio",anuncioDTO);
+        return "admin/anuncios/crear";
     }
 
-    private String getFileExtension(String filename) {
-        int lastIndexOfDot = filename.lastIndexOf(".");
-        return lastIndexOfDot != -1 ? filename.substring(lastIndexOfDot) : "";
+    @PostMapping("/guardar")
+    public String guardarAnuncio(
+            @ModelAttribute("anuncio") AnuncioDTO anuncioDTO,
+            Model model,
+            @RequestParam("imagenFile") MultipartFile file
+    ){
+
+        try{
+            String carpeta = "src/main/resources/static/img/";
+            Path uploadPath = Paths.get(carpeta);
+            if(!Files.exists(uploadPath)){
+                Files.createDirectories(uploadPath);
+            }
+            if(!file.isEmpty()){
+                String hashName = Util.generateFileHash(file);
+                Path path = Paths.get(carpeta + hashName);
+                Files.write(path, file.getBytes());
+                String filePath = "/img/" + hashName;
+                anuncioDTO.setRutaImage(filePath);
+            }
+
+
+            this.anuncioService.crearAnuncio(anuncioDTO);
+
+            model.addAttribute("success","El anuncio se guardo de manera correcta");
+            return "redirect:/admin/anuncios?success="+"El anuncio se guardo";
+        }catch (Exception e){
+            model.addAttribute("error","Error al guardar el anuncio:" + e.getMessage());
+            System.out.println(e.getMessage());
+            return "redirect:/admin/anuncios/";
+        }
+
     }
+
 }

@@ -47,6 +47,7 @@ public class AnuncioDTO {
         anuncio.setCantidadBanios(this.cantidadBanios);
         anuncio.setCantidadCochera(this.cantidadCochera);
         anuncio.setCantidadCuartos(this.cantidadCuartos);
+        anuncio.setRutaImage(this.rutaImage);
         return anuncio;
     }
     public AnuncioDTO(Anuncio anuncio){
