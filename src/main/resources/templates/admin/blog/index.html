@@ -15,6 +15,8 @@
         <link rel="stylesheet" th:href="@{/dist/css/adminlte.css}"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
+        <!-- Estilos de SweetAlert -->
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     </head> <!--end::Head--> <!--begin::Body-->
     <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
         <div class="app-wrapper"> <!--begin::Header-->
@@ -48,7 +50,7 @@
                         <table class="table table-striped table-bordered">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>#</th>
+                                    <th>ID</th>
                                     <th>Título</th>
                                     <th>Texto</th>
                                     <th>Imagen</th>
@@ -58,19 +60,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="blog, iterStat : ${blog}">
-                                    <td th:text="${iterStat.count}"></td>
+                                <tr th:each="blog, iterStat : ${listaBlogs}">
+                                    <td th:text="${blog.id}"></td>
                                     <td th:text="${blog.title}"></td>
                                     <td th:text="${blog.texto}"></td>
                                     <td>
-                                        <img th:src="${blog.imagePath}" alt="Imagen del blog" class="img-thumbnail" style="max-width: 100px;">
+                                        <img th:src="@{${blog.imagePath}}" alt="Imagen del blog" class="img-thumbnail" style="width: 100px; height: auto;">
                                     </td>
-                                    <td th:text="${blog.usuario != null ? blog.usuario.nombre : 'Sin usuario'}"></td>
-                                    <td th:text="${#dates.format(blog.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+                                    <td th:text="${blog.usuario != null ? blog.usuario.username : 'Sin usuario'}"></td>
+                                    <td th:text="${blog.createdAt}"></td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <a href="#" class="btn btn-primary btn-sm">Editar</a>
-                                            <button class="btn btn-danger btn-sm" onclick="confirmDelete()">Eliminar</button>
+                                            <a th:href="@{/admin/blog/editar/{id}(id=${blog.id})}" class="btn btn-primary btn-sm">Editar</a>
+
+                                            <button class="btn btn-danger btn-sm" 
+                                                    th:attr="data-id=${blog.id}" 
+                                                    onclick="confirmDelete(this)">Eliminar</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -80,8 +85,10 @@
                 </div>
             </main> <!--end::App Main--> <!--begin::Footer-->
             <footer th:replace="admin/fragments/footer :: footer"/>
-        </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
+        </div> <!--end::App Wrapper--> 
+        <!--begin::Script--> 
         <div th:replace="admin/fragments/scripts :: scripts"></div>
+        <!--begin::Third Party Plugin(OverlayScrollbars)-->
     </body><!--end::Body-->
 
 </html>

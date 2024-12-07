@@ -1,15 +1,93 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
+<html lang="en" th:fragment="main"> <!--begin::Head-->
+
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>AdminLTE v4 | Dashboard</title><!--begin::Primary Meta Tags-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+        <meta name="title" content="AdminLTE v4 | Dashboard">
+        <meta name="author" content="ColorlibHQ">
+        <meta name="description" content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS.">
+        <meta name="keywords" content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard"><!--end::Primary Meta Tags--><!--begin::Fonts-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"><!--end::Fonts--><!--begin::Third Party Plugin(OverlayScrollbars)-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous"><!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Third Party Plugin(Bootstrap Icons)-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
+        <link rel="stylesheet" th:href="@{/dist/css/adminlte.css}"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">
+        <!-- Estilos de SweetAlert -->
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    </head> <!--end::Head--> <!--begin::Body-->
+    <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
+        <div class="app-wrapper"> <!--begin::Header-->
+            <nav th:replace="admin/fragments/nav :: nav"></nav>
+            <aside th:replace="admin/fragments/aside :: aside"></aside>
+
+            <main class="app-main" > <!--begin::App Content Header-->
+                <div class="app-content-header"> <!--begin::Container-->
+                    <div class="container-fluid"> <!--begin::Row-->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h3 class="mb-0">Blog</h3>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-end">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        Anuncios
+                                    </li>
+                                </ol>
+                            </div>
+                        </div> <!--end::Row-->
+                    </div> <!--end::Container-->
+                </div> <!--end::App Content Header--> <!--begin::App Content-->
+                <div class="app-content">
+                    <!--begin::Container-->
+                    <div class="container-fluid" th:fragment="main(content)">
+                        <div class="container mt-4">
+                            <h2>Actualizar entrada de Blog</h2>
+                            <form th:action="@{/admin/blog/actualizar}" method="post" th:object="${blog}" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Título</label>
+                                    <input type="text" id="title" name="title" class="form-control" th:field="*{title}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="texto" class="form-label">Texto</label>
+                                    <textarea id="texto" name="texto" class="form-control" th:field="*{texto}" rows="5" required></textarea>
+                                </div>
+
+                                <!-- Modificación para la selección de imagen -->
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Seleccionar Imagen</label>
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="mostrarVistaPrevia(event)" required>
+                                </div>
+
+                                <div class="my-3">
+                                    <!-- Vista previa de la imagen seleccionada -->
+                                    <img id="vistaPrevia" src="#" alt="Vista previa" style="display:none; width: 100px; height: 100px; object-fit: cover;" />
+                                </div>
+
+                                <!-- Campo oculto para enviar la ruta de la imagen al servidor -->
+                                <input type="hidden" id="imagePath" name="imagePath" th:field="*{imagePath}">
+
+                                <div class="mb-3">
+                                    <label for="usuario" class="form-label">Usuario</label>
+                                    <select id="usuario" name="usuario" class="form-select" th:field="*{usuario.id}">
+                                        <option th:each="user : ${usuarios}" th:value="${user.id}" th:text="${user.username}"></option>
+                                    </select>
+                                </div>
+                                <input type="hidden" th:field="*{id}" /> <!-- Campo oculto para el ID del blog -->
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main> <!--end::App Main--> <!--begin::Footer-->
+            <footer th:replace="admin/fragments/footer :: footer"/>
+        </div> <!--end::App Wrapper--> 
+        <!--begin::Script--> 
+        <div th:replace="admin/fragments/scripts :: scripts"></div>
+        <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    </body><!--end::Body-->
+
 </html>

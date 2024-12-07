@@ -25,8 +25,11 @@ public class Blog {
     )
     private Usuario usuario;
 
+    @Column(columnDefinition = "TIMESTAMP(3)")
     private LocalDateTime createdAt;
+    @Column(columnDefinition = "TIMESTAMP(3)")
     private LocalDateTime updatedAt;
+    
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
